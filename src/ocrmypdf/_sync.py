@@ -217,7 +217,7 @@ def exec_page_sync(page_context: PageContext) -> PageResult:
         (hocr_out, text_out) = ocr_engine_hocr(ocr_image_out, page_context)
 #         print(hocr_out)
         ocr_out = render_hocr_page(hocr_out, page_context)
-        writepath = options.output_file + ".ocr"
+        writepath = options.input_file + ".ocr"
         mode = 'a' if os.path.exists(writepath) else 'w'
         with open(writepath, 'a+') as f:
             f.write(hocr_out+"\n")
