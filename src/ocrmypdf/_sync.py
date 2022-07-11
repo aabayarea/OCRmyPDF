@@ -215,33 +215,17 @@ def exec_page_sync(page_context: PageContext) -> PageResult:
 
     if options.pdf_renderer.startswith('hocr'):
         (hocr_out, text_out) = ocr_engine_hocr(ocr_image_out, page_context)
-        print(hocr_out)
+#         print(hocr_out)
         ocr_out = render_hocr_page(hocr_out, page_context)
-        return hocr_out, PageResult(
-        pageno=page_context.pageno,
-        pdf_page_from_image=pdf_page_from_image_out,
-        ocr=ocr_out,
-        text=text_out,
-        orientation_correction=orientation_correction,
-    )
+        writepath = options.output_file + ".ocr"
+        mode = 'a' if os.path.exists(writepath) else 'w'
+        with open(writepath, mode) as f:
+            f.write(hocr_out))
+            
     elif options.pdf_renderer == 'sandwich':
         (ocr_out, text_out) = ocr_engine_textonly_pdf(ocr_image_out, page_context)
-        return PageResult(
-        pageno=page_context.pageno,
-        pdf_page_from_image=pdf_page_from_image_out,
-        ocr=ocr_out,
-        text=text_out,
-        orientation_correction=orientation_correction,
-    )
     else:
         raise NotImplementedError(f"pdf_renderer {options.pdf_renderer}")
-        return PageResult(
-        pageno=page_context.pageno,
-        pdf_page_from_image=pdf_page_from_image_out,
-        ocr=ocr_out,
-        text=text_out,
-        orientation_correction=orientation_correction,
-    )
 
     return PageResult(
         pageno=page_context.pageno,
