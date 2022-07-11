@@ -224,7 +224,7 @@ def exec_page_sync(page_context: PageContext) -> PageResult:
             append_write = 'w' # make a new file if not
             
         highscore = open(writepath,append_write)
-        highscore.write(hocr_out+"\n")
+        highscore.write(str(hocr_out)+"\n")
         highscore.close()
         
             
