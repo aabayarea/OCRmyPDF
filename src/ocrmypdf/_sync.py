@@ -220,7 +220,7 @@ def exec_page_sync(page_context: PageContext) -> PageResult:
         writepath = options.output_file + ".ocr"
         mode = 'a' if os.path.exists(writepath) else 'w'
         with open(writepath, mode) as f:
-            f.write(hocr_out))
+            f.write(hocr_out)
             
     elif options.pdf_renderer == 'sandwich':
         (ocr_out, text_out) = ocr_engine_textonly_pdf(ocr_image_out, page_context)
